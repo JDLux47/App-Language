@@ -16,7 +16,6 @@
 	
 
 package com.example.language;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -71,17 +70,23 @@ public class google_pixel_2___1_activity extends Activity {
 		_bg__button_rounded_5_lead_true_hover.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(placeholder_text.getText().toString().equals("JD921L") && placeholder_text_ek1.getText().toString().equals("12345678")) {
+				if (AuthUtil.loginValidation("JD921L","12345678")) {
 					Toast.makeText(google_pixel_2___1_activity.this, "Кнопка нажата", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(google_pixel_2___1_activity.this, google_pixel_2___3_activity.class);
 					startActivity(intent);
-				}
-				else
+				} else
 					Toast.makeText(google_pixel_2___1_activity.this, "Неверная почта или пароль", Toast.LENGTH_SHORT).show();
 			}
 		});
 
-	};
+	}
+
+	public static class AuthUtil {
+		public static boolean loginValidation(String login, String password) {
+			// Проверяем, соответствуют ли введенные данные заданным значениям
+			return login.equals("JD921L") && password.equals("12345678");
+		}
+	}
 }
 	
 	

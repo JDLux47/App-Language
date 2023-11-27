@@ -19,11 +19,13 @@ package com.example.language;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -48,6 +50,9 @@ import android.widget.Toast;
 	private View _bg__button_rounded_5_alert_true_default_3;
 	private TextView text_ek4;
 	private ImageView rules;
+	private Button button;
+
+	private MonitoringBroadcastReceiver batteryLevelReceiver;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ import android.widget.Toast;
 		_bg__button_rounded_5_alert_true_default_3 = (View) findViewById(R.id._bg__button_rounded_5_alert_true_default_3);
 		text_ek4 = (TextView) findViewById(R.id.text_ek4);
 		rules = (ImageView) findViewById(R.id.rules);
+		button = (Button ) findViewById(R.id._bg__button_rounded_5_lead_true_hover);
 
 
 		_bg__button_rounded_5_alert_true_default_2 = findViewById(R.id._bg__button_rounded_5_alert_true_default_2);
@@ -84,7 +90,17 @@ import android.widget.Toast;
 				startActivity(intent);
 			}
 		});
-	
+
+		button = findViewById(R.id._bg__button_rounded_5_lead_true_hover);
+		button.setOnClickListener(new Button.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				batteryLevelReceiver = new MonitoringBroadcastReceiver();
+				IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+				registerReceiver(batteryLevelReceiver, filter);
+			}
+		});
+
 	}
 }
 	
